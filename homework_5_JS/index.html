@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div id="root">
+        <div class="container">
+
+            <button class="show-btn" @click="toggleCart()">{{isVisibleCart ? "Close cart" : "Show cart"}}</button> <br>
+            <div data-id="cart" class="cart" v-if="isVisibleCart">
+                <div class="goods__item" v-for="item in cartItems">
+                    <img :src="imgCatalog" alt="photo">
+                    <h3 class="goods__title">{{item.product_name}}</h3>
+                    <p class="goods__price">{{item.price}}</p>
+                    <span>Quantity: {{item.quantity}}</span>
+                    <button class="remove-btn" @click="removeFromCart(item)">Remove from cart</button>
+                </div>
+            </div>
+
+            <input type="search" placeholder="Search something" class="search__goods" v-model="searchGoods">
+            <button type="submit" class="search-btn" @click="filterGoods()">Go</button>
+            <div class="goods" data-id="goods">
+                <div class="goods__item" v-for="item in filteredGoods">
+                    <img :src="imgCatalog" alt="photo" class="goods__img">
+                    <h3 class="goods__title">{{item.product_name}}</h3>
+                    <p class="goods__price">{{item.price}}</p>
+                    <button class="add-btn" @click="addToCart(item)">Add to cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
